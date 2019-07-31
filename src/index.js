@@ -33,6 +33,7 @@ app.use('/api/products', require('./routes/products.routes'));
 app.use('/api/categories', require('./routes/categories.routes'));
 app.use('/api/sucursals', require('./routes/sucursals.routes'));
 app.use('/api/search', require('./routes/search.routes'));
+app.use('/api/users-admin', require('./routes/usersAdmin.routes'));
 
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')));
