@@ -17,7 +17,9 @@ class userAdminController{
             if(input.adminPassword) {
                 if(await bcrypt.compareSync(input.adminPassword, admin.adminPassword)) {
                     console.log('User Admin Verificated');
-                    const token = jwt.sign({admin}, process.env.SECRET_KEY_JWT);
+                    const token = jwt.sign({admin}, process.env.SECRET_KEY_JWT, {
+                        expiresIn: 86400 // expires in 24 hours
+                    });
                     console.log(token);
                 } else {
                     console.log('Incorrect Password');
