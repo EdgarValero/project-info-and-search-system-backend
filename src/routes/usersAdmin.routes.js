@@ -3,7 +3,7 @@ const router = Router();
 
 const userAdminController = require('../controllers/usersAdmin.controller');
 
-router.post('/signup-user-admin', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
     const { adminFirstName, adminLastName, adminEmail, adminPassword } = req.body;
     const input = {
         adminFirstName, 
@@ -14,13 +14,14 @@ router.post('/signup-user-admin', async (req, res, next) => {
     await userAdminController.signUp(input);
 });
 
-router.post('/signin-user-admin', async (req, res, next) => {
+router.post('/signin', async (req, res, next) => {
     const { adminEmail, adminPassword } = req.body;
     const input = {
         adminEmail, 
         adminPassword
     }
-    await userAdminController.signIn(input);
+    const data = await userAdminController.signIn(input);
+    res.json(data);
 });
 
 module.exports = router;

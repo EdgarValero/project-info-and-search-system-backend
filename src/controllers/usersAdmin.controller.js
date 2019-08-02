@@ -12,23 +12,26 @@ class userAdminController{
         console.log(newUserAdmin);
     }
     async signIn(input) {
-        const admin = await userAdmin.findOne({ adminEmail: input.adminEmail });
-        if(admin) {
-            if(input.adminPassword) {
-                if(await bcrypt.compareSync(input.adminPassword, admin.adminPassword)) {
-                    console.log('User Admin Verificated');
-                    const token = jwt.sign({admin}, process.env.SECRET_KEY_JWT, {
-                        expiresIn: 86400 // expires in 24 hours
-                    });
-                    console.log(token);
+        if(input.adminEmail) {
+            const admin = await userAdmin.findOne({ adminEmail: input.adminEmail });
+            if(admin) {
+                if(input.adminPassword) {
+                    if(await bcrypt.compareSync(input.adminPassword, admin.adminPassword)) {
+                        const token = jwt.sign({admin}, process.env.SECRET_KEY_JWT, {
+                            expiresIn: 86400 // expires in 24 hours
+                        });
+                        return {token}
+                    } else {
+                        return {msg: 'incorrect_password'};
+                    }
                 } else {
-                    console.log('Incorrect Password');
+                    return {msg: 'intro_your_password'};
                 }
             } else {
-                console.log('Intro your password');
+                return {msg: 'user_not_found'};
             }
         } else {
-            console.log('User no exist.');
+            return {msg: 'intro_your_email'};
         }
     }
 }
