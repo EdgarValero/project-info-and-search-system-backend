@@ -20,7 +20,11 @@ router.post('/', async (req, res, next) => {
             productCategory: { $regex: productSearch }
         }
     ]);
-    res.send({ searched });
+    if(searched == '') {
+        res.json({productSearch, msg: 'product_not_found'});
+    } else {
+        res.json({productSearch, searched});
+    }
 });
 
 module.exports = router;
