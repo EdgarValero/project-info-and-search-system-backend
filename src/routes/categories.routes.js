@@ -26,14 +26,14 @@ router.post('/add-category', async (req, res , next) => {
         imagePath
     };
     await categoryController.addCategory(input);
-    res.json({message: 'Category Saved'});
+    res.json({msg: 'category_saved'});
 });
 
 router.delete('/delete-category/:id', async (req, res, next) => {
     const { id } = req.params;
     const category = await categoryController.deleteCategory(id);
     fs.unlink(path.resolve('./src/public' + category.imagePath));
-    res.json({message: 'Category Deleted'});
+    res.json({msg: 'category_deleted'});
 });
 
 router.put('/edit-category/:id', async (req, res, next) => {
@@ -51,7 +51,7 @@ router.put('/edit-category/:id', async (req, res, next) => {
         fs.unlink(path.resolve('./src/public' + product.imagePath));
     }
     await categoryController.updateCategory(id, input);
-    res.json({message: 'Category Updated'});
+    res.json({msg: 'category_updated'});
 });
 
 module.exports = router;
