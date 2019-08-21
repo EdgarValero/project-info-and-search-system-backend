@@ -21,9 +21,9 @@ router.post('/', async (req, res, next) => {
         }
     ]);
     if(searched == '') {
-        res.json({productSearch, msg: 'product_not_found'});
+        res.json({msg: 'product_not_found'});
     } else {
-        res.json({productSearch, searched});
+        res.json(searched);
     }
 });
 
