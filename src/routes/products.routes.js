@@ -24,6 +24,7 @@ router.get('/featured/products', async (req, res, next) => {
 router.post('/add-product', async (req, res , next) => {
     const { productName, productType, productCategory, productDescription, salePrice, disponibility } = req.body;
     const imagePath = '/uploads/' + req.file.filename;
+    console.log(typeof(salePrice));
     const input = {
         productName,
         productType,
@@ -34,14 +35,14 @@ router.post('/add-product', async (req, res , next) => {
         imagePath
     };
     await productController.addProduct(input);
-    res.json({message: 'Product Saved'});
+    res.json({msg: 'product_saved'});
 });
 
 router.delete('/delete-product/:id', async (req, res, next) => {
     const { id } = req.params;
     const product = await productController.deleteProduct(id);
     fs.unlink(path.resolve('./src/public' + product.imagePath));
-    res.json({message: 'Product Deleted'});
+    res.json({msg: 'product_deleted'});
 });
 
 router.put('/edit-product/:id', async (req, res, next) => {
@@ -62,7 +63,7 @@ router.put('/edit-product/:id', async (req, res, next) => {
         fs.unlink(path.resolve('./src/public' + product.imagePath));
     }
     await productController.updateProduct(id, input);
-    res.json({message: 'Product Updated'});
+    res.json({msg: 'product_updated'});
 });
 
 router.get('/categories/alimentos-basicos', async (req, res, next) => {

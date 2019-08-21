@@ -23,13 +23,13 @@ router.post('/add-sucursal', async (req, res , next) => {
         googleMaps
     };
     await sucursalController.addSucursal(input);
-    res.json({message: 'Sucursal Saved'});
+    res.json({msg: 'sucursal_saved'});
 });
 
 router.delete('/delete-sucursal/:id', async (req, res, next) => {
     const { id } = req.params;
     await sucursalController.deleteSucursal(id);
-    res.json({message: 'Sucursal Deleted'});
+    res.json({msg: 'sucursal_deleted'});
 });
 
 router.put('/edit-sucursal/:id', async (req, res, next) => {
@@ -41,7 +41,7 @@ router.put('/edit-sucursal/:id', async (req, res, next) => {
        googleMaps
     };
     await sucursalController.updateSucursal(id, input);
-    res.json({message: 'Sucursal Updated'});
+    res.json({msg: 'sucursal_updated'});
 });
 
 module.exports = router;
