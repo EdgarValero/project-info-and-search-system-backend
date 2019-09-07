@@ -16,9 +16,10 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/add-sucursal', async (req, res , next) => {
     console.log(req.body);
-    const { direction, numberContact, googleMaps } = req.body;
+    const { address, officeHours, numberContact, googleMaps } = req.body;
     const input = {
-        direction, 
+        address,
+        officeHours,
         numberContact, 
         googleMaps
     };
@@ -34,9 +35,10 @@ router.delete('/delete-sucursal/:id', async (req, res, next) => {
 
 router.put('/edit-sucursal/:id', async (req, res, next) => {
     const { id } = req.params;
-    const { direction, numberContact, googleMaps } = req.body;
+    const { address, officeHours, numberContact, googleMaps } = req.body;
     const input = {
-       direction, 
+       address, 
+       officeHours,
        numberContact,
        googleMaps
     };
