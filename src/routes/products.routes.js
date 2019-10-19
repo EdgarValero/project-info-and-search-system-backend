@@ -5,23 +5,23 @@ const path = require('path');
 
 const productController = require('../controllers/products.controllers')
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     const products = await productController.getProducts();
     res.json(products);
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const product = await productController.getProduct(id);
     res.json(product);
 });
 
-router.get('/featured/products', async (req, res, next) => {
+router.get('/featured/products', async (req, res) => {
     const products = await productController.getProductsFeatured();
     res.json(products);
 });
 
-router.post('/add-product', async (req, res , next) => {
+router.post('/add-product', async (req, res) => {
     const { productName, productType, productCategory, productDescription, salePrice, disponibility } = req.body;
     const imagePath = '/uploads/' + req.file.filename;
     console.log(typeof(salePrice));
@@ -38,14 +38,14 @@ router.post('/add-product', async (req, res , next) => {
     res.json({msg: 'product_saved'});
 });
 
-router.delete('/delete-product/:id', async (req, res, next) => {
+router.delete('/delete-product/:id', async (req, res) => {
     const { id } = req.params;
     const product = await productController.deleteProduct(id);
     fs.unlink(path.resolve('./src/public' + product.imagePath));
     res.json({msg: 'product_deleted'});
 });
 
-router.put('/edit-product/:id', async (req, res, next) => {
+router.put('/edit-product/:id', async (req, res) => {
     const { id } = req.params;
     const { productName, productType, productCategory, productDescription, salePrice, disponibility } = req.body;
     const input = {
@@ -66,47 +66,47 @@ router.put('/edit-product/:id', async (req, res, next) => {
     res.json({msg: 'product_updated'});
 });
 
-router.get('/categories/alimentos-basicos', async (req, res, next) => {
+router.get('/categories/alimentos-basicos', async (req, res) => {
     const products = await productController.getProductsCategoryAlimentosBasicos();
     res.json(products);
 });
 
-router.get('/categories/cereales', async (req, res, next) => {
+router.get('/categories/cereales', async (req, res) => {
     const products = await productController.getProductsCategoryCereales();
     res.json(products);
 });
 
-router.get('/categories/dulces-y-snacks', async (req, res, next) => {
+router.get('/categories/dulces-y-snacks', async (req, res) => {
     const products = await productController.getProductsCategoryDulcesSnacks();
     res.json(products);
 });
 
-router.get('/categories/cuidado-personal', async (req, res, next) => {
+router.get('/categories/cuidado-personal', async (req, res) => {
     const products = await productController.getProductsCategoryCuidadoPersonal();
     res.json(products);
 });
 
-router.get('/categories/charcuteria', async (req, res, next) => {
+router.get('/categories/charcuteria', async (req, res) => {
     const products = await productController.getProductsCategoryCharcuteria();
     res.json(products);
 });
 
-router.get('/categories/bebidas-liquidas', async (req, res, next) => {
+router.get('/categories/bebidas-liquidas', async (req, res) => {
     const products = await productController.getProductsCategoryBebidasLiquidas();
     res.json(products);
 });
 
-router.get('/categories/bebidas-en-polvo', async (req, res, next) => {
+router.get('/categories/bebidas-en-polvo', async (req, res) => {
     const products = await productController.getProductsCategoryBebidasEnPolvo();
     res.json(products);
 });
 
-router.get('/categories/yogurts', async (req, res, next) => {
+router.get('/categories/yogurts', async (req, res) => {
     const products = await productController.getProductsCategoryYogurts();
     res.json(products);
 });
 
-router.get('/categories/helados', async (req, res, next) => {
+router.get('/categories/helados', async (req, res) => {
     const products = await productController.getProductsCategoryHelados();
     res.json(products);
 });

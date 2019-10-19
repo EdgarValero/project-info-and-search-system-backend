@@ -10,6 +10,7 @@ class userAdminController{
         const newUserAdmin = new userAdmin(input);
         await newUserAdmin.save();
         console.log(newUserAdmin);
+        return newUserAdmin;
     }
     async signIn(input) {
         if(input.adminEmail) {

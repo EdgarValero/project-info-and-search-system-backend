@@ -5,18 +5,18 @@ const path = require('path');
 
 const categoryController = require('../controllers/categories.controllers')
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     const categories = await categoryController.getCategories();
     res.json(categories);
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const category = await categoryController.getCategory(id);
     res.json(category);
 });
 
-router.post('/add-category', async (req, res , next) => {
+router.post('/add-category', async (req, res) => {
     const { categoryName, categoryDescription, categoryUrl } = req.body;
     const imagePath = '/uploads/' + req.file.filename;
     const input = {
@@ -29,14 +29,14 @@ router.post('/add-category', async (req, res , next) => {
     res.json({msg: 'category_saved'});
 });
 
-router.delete('/delete-category/:id', async (req, res, next) => {
+router.delete('/delete-category/:id', async (req, res) => {
     const { id } = req.params;
     const category = await categoryController.deleteCategory(id);
     fs.unlink(path.resolve('./src/public' + category.imagePath));
     res.json({msg: 'category_deleted'});
 });
 
-router.put('/edit-category/:id', async (req, res, next) => {
+router.put('/edit-category/:id', async (req, res) => {
     const { id } = req.params;
     const { categoryName, categoryDescription, categoryUrl } = req.body;
     const input = {
