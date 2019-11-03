@@ -3,7 +3,7 @@ const router = Router();
 
 const Product = require("../models/products.model");
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
     const { productSearch } = req.body;
     console.log(req.body);
     const searched = await Product.find().or([

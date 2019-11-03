@@ -3,22 +3,23 @@ const router = Router();
 
 const sucursalController = require('../controllers/sucursals.controllers')
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     const sucursals = await sucursalController.getSucursals();
     res.json(sucursals);
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const sucursal = await sucursalController.getSucursal(id);
     res.json(sucursal);
 });
 
-router.post('/add-sucursal', async (req, res , next) => {
+router.post('/add-sucursal', async (req, res) => {
     console.log(req.body);
-    const { direction, numberContact, googleMaps } = req.body;
+    const { address, officeHours, numberContact, googleMaps } = req.body;
     const input = {
-        direction, 
+        address,
+        officeHours,
         numberContact, 
         googleMaps
     };
@@ -26,17 +27,18 @@ router.post('/add-sucursal', async (req, res , next) => {
     res.json({msg: 'sucursal_saved'});
 });
 
-router.delete('/delete-sucursal/:id', async (req, res, next) => {
+router.delete('/delete-sucursal/:id', async (req, res) => {
     const { id } = req.params;
     await sucursalController.deleteSucursal(id);
     res.json({msg: 'sucursal_deleted'});
 });
 
-router.put('/edit-sucursal/:id', async (req, res, next) => {
+router.put('/edit-sucursal/:id', async (req, res) => {
     const { id } = req.params;
-    const { direction, numberContact, googleMaps } = req.body;
+    const { address, officeHours, numberContact, googleMaps } = req.body;
     const input = {
-       direction, 
+       address, 
+       officeHours,
        numberContact,
        googleMaps
     };
