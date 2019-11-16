@@ -33,12 +33,21 @@ router.get('/', async (req, res) => {
 router.put('/update/:id', async (req, res) => {
     const { id } = req.params;
     const { adminFirstName, adminLastName, adminEmail, adminPassword} = req.body;
-    const input = {
-        adminFirstName,
-        adminLastName,
-        adminEmail,
-        adminPassword
-    };
+    let input = {};
+    if (adminPassword == "undefined") {
+        input = {
+            adminFirstName,
+            adminLastName,
+            adminEmail
+        };
+    } else {
+        input = {
+            adminFirstName,
+            adminLastName,
+            adminEmail,
+            adminPassword
+        };
+    }
     await userAdminController.updateUserAdmin(id, input);
     res.json({msg: 'user_admin_updated'});
 });
