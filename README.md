@@ -1,5 +1,9 @@
 # backend
 
+## Requisitos
+
+- Node.js **24.19.0** o superior (Active LTS)
+
 ## Project setup
 ```
 npm install
